@@ -96,6 +96,9 @@ const Caesar = (() => {
   let resultElement;
 
   // todo rest
+  
+  //let radioElement;//type
+  //let type;//radioElement
 
   function writeResult() {
     if (type === 'encode') {
@@ -104,7 +107,7 @@ const Caesar = (() => {
       // hitt
     }
     eshElement.textContent = shift;
-    resultElement.textContent = input;
+    resultElement.textContent = input + " " + alphabet;
   
   }
 
@@ -120,6 +123,12 @@ const Caesar = (() => {
     writeResult();
   }
 
+  function alphabetEvent() {
+    alphabet = alphaElement.value;
+
+    writeResult();
+  }
+
   
 
   function init(el) {
@@ -129,7 +138,12 @@ const Caesar = (() => {
     shiftElement = el.querySelector('#shift');
     resultElement = el.querySelector('.result');
     eshElement = el.querySelector('.shiftValue');//synir hlidrunar tölu
+    alphaElement = el.querySelector('#alphabet');
+    //type = //encode/decode
 
+    //type.addEventListener('in')
+
+    alphaElement.addEventListener('input', alphabetEvent);
     inputElement.addEventListener('input', inputEvent);
     shiftElement.addEventListener('input', shiftEvent);
 
