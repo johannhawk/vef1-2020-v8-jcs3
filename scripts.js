@@ -90,6 +90,7 @@ const Caesar = (() => {
   let shift = 3;
 
   let input = '';
+  let output = '';
 
   let inputElement;
   let shiftElement;
@@ -103,11 +104,12 @@ const Caesar = (() => {
   function writeResult() {
     if (type === 'encode') {
       // skrifa út encode(input, shift, alphabet);
+      output = encode(input, shift, alphabet);
     } else {
-      // hitt
+      output = decode(input, shift, alphabet);
     }
     eshElement.textContent = shift;
-    resultElement.textContent = input + " " + alphabet;
+    resultElement.textContent = output + " " + alphabet;
   
   }
 
