@@ -13,11 +13,13 @@
  * @param {string} alphabet Stafróf sem afkóða á út frá
  * @returns {string} Upprunalegi strengurinn hliðraður um n til hægri
  */
-function encode(str, n, alphabet = '') {
+function encode(str, n, alphabet) {
+  str = str.toUpperCase();
 
   let letters = alphabet.split('');//splitta alphabet til að gera það nothæft
   let output = '';
 
+  //debugger;
   for(var i = 0; i < str.length; i++){
     let stafur = str[i];
     
@@ -28,7 +30,7 @@ function encode(str, n, alphabet = '') {
 
     let staf_index = letters.indexOf(stafur)
 
-    let nytt_index = staf_index + n;
+    let nytt_index = staf_index + parseInt(n);//mikilvægt að hafa parseint
 
     if(nytt_index > letters.length -1)
       nytt_index = nytt_index - letters.length;
@@ -50,12 +52,15 @@ function encode(str, n, alphabet = '') {
  * @param {string} alphabet Stafróf sem afkóða á út frá
  * @returns {string} Upprunalegi strengurinn hliðraður um n til vinstri
  */
-function decode(str, n, alphabet = '') {
+function decode(str, n, alphabet) {
+  str = str.toUpperCase();
 
   let letters = alphabet.split('');//splitta alphabet til að gera það nothæft
   let output = '';
 
+  
   for(var i = 0; i < str.length; i++){
+    //debugger;
     let stafur = str[i];
 
     if(stafur === ' '){//ef það eru einhvervegin bil
@@ -65,17 +70,17 @@ function decode(str, n, alphabet = '') {
 
     let staf_index = letters.indexOf(stafur)
 
-    let nytt_index = staf_index - n;
+    let nytt_index = staf_index - parseInt(n);
 
     if(nytt_index > letters.length -1)
-      nytt_index = nytt_index + letters.length;
+      nytt_index = nytt_index - letters.length;
 
     if(nytt_index < 0)
-      nytt_index = nytt_index - letters.length;
+      nytt_index = nytt_index + letters.length;
 
     output += letters[nytt_index];
   }
-
+  //debugger;
   return output;
 }
 
@@ -91,6 +96,7 @@ const Caesar = (() => {
 
   let input = '';
   let output = '';
+  let n = 0;//núllstilling til að setja tölurnar saman rétt
 
   let inputElement;
   let shiftElement;
@@ -102,19 +108,32 @@ const Caesar = (() => {
   //let type;//radioElement
 
   function writeResult() {
+    eshElement.textContent = shift;
+    debugger;
     if (type === 'encode') {
       // skrifa út encode(input, shift, alphabet);
       output = encode(input, shift, alphabet);
     } else {
       output = decode(input, shift, alphabet);
     }
-    eshElement.textContent = shift;
-    resultElement.textContent = output + " " + alphabet;
+    
+    resultElement.textContent = output;
   
+    //debugger;
   }
+
 
   function inputEvent() {
     input = inputElement.value;
+    
+    /*shift = shiftElement.value;
+    alphabet = alphaElement.value;
+      */
+    writeResult();
+  }
+
+  function radioEvent() {//radio event verður að vera næst fremst
+    type = typeElement.value;
 
     writeResult();
   }
@@ -133,6 +152,8 @@ const Caesar = (() => {
 
   
 
+  
+
   function init(el) {
     // Setja event handlera á viðeigandi element
 
@@ -141,10 +162,9 @@ const Caesar = (() => {
     resultElement = el.querySelector('.result');
     eshElement = el.querySelector('.shiftValue');//synir hlidrunar tölu
     alphaElement = el.querySelector('#alphabet');
-    //type = //encode/decode
+    typeElement = el.querySelector('.radio'); //encode/decode
 
-    //type.addEventListener('in')
-
+    typeElement.addEventListener('click', radioEvent);
     alphaElement.addEventListener('input', alphabetEvent);
     inputElement.addEventListener('input', inputEvent);
     shiftElement.addEventListener('input', shiftEvent);
