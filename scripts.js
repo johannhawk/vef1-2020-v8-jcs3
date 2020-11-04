@@ -110,7 +110,7 @@ const Caesar = (() => {
 
   function writeResult() {
     eshElement.textContent = shift;
-    debugger;
+    //debugger;
     if (type === 'encode') {
       // skrifa út encode(input, shift, alphabet);
       output = encode(input, shift, alphabet);
@@ -136,7 +136,7 @@ const Caesar = (() => {
   function radioEvent() {
     type = typeElement.value;
 
-    debugger;
+    //debugger;
     writeResult();
   }
 
@@ -166,7 +166,7 @@ const Caesar = (() => {
     alphaElement = el.querySelector('#alphabet');
     typeElement = el.querySelector('.radio'); //encode/decode
 
-    typeElement.addEventListener('change', radioEvent);
+    typeElement.addEventListener('click', radioEvent);//click virkar
     alphaElement.addEventListener('input', alphabetEvent);
     inputElement.addEventListener('input', inputEvent);
     shiftElement.addEventListener('input', shiftEvent);
