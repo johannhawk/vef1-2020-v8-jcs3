@@ -90,6 +90,7 @@ const Caesar = (() => {
 
   // Default type, uppfært af radio input
   let type = 'encode';
+  //let type = document.querySelectorAll('input[type=radio]'); 
 
   // Default hliðrun, uppfært af "shift"
   let shift = 3;
@@ -135,6 +136,7 @@ const Caesar = (() => {
   function radioEvent() {//radio event verður að vera næst fremst
     type = typeElement.value;
 
+    debugger;
     writeResult();
   }
 
@@ -164,12 +166,10 @@ const Caesar = (() => {
     alphaElement = el.querySelector('#alphabet');
     typeElement = el.querySelector('.radio'); //encode/decode
 
-    typeElement.addEventListener('click', radioEvent);
+    typeElement.addEventListener('change', radioEvent);
     alphaElement.addEventListener('input', alphabetEvent);
     inputElement.addEventListener('input', inputEvent);
     shiftElement.addEventListener('input', shiftEvent);
-
-
   }
 
   return {
