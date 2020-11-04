@@ -133,7 +133,7 @@ const Caesar = (() => {
     writeResult();
   }
 
-  function radioEvent() {//radio event verður að vera næst fremst
+  function radioEvent() {
     type = typeElement.value;
 
     debugger;
