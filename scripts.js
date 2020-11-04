@@ -97,7 +97,6 @@ const Caesar = (() => {
 
   let input = '';
   let output = '';
-  let n = 0;//núllstilling til að setja tölurnar saman rétt
 
   let inputElement;
   let shiftElement;
@@ -109,7 +108,8 @@ const Caesar = (() => {
   //let type;//radioElement
 
   function writeResult() {
-    eshElement.textContent = shift;
+    eshElement.textContent = shift;//stjórnar tölunna við hliðrunar línuna
+
     //debugger;
     if (type === 'encode') {
       // skrifa út encode(input, shift, alphabet);
@@ -159,14 +159,14 @@ const Caesar = (() => {
   function init(el) {
     // Setja event handlera á viðeigandi element
 
-    inputElement = el.querySelector('#input');
-    shiftElement = el.querySelector('#shift');
-    resultElement = el.querySelector('.result');
+    inputElement = el.querySelector('#input');//"Strengur:" id="input" 
+    shiftElement = el.querySelector('#shift');//"Hliðrun:" id="shift"
+    resultElement = el.querySelector('.result');//setur i <div class="result"></div>
     eshElement = el.querySelector('.shiftValue');//synir hlidrunar tölu
-    alphaElement = el.querySelector('#alphabet');
-    typeElement = el.querySelector('.radio'); //encode/decode
+    alphaElement = el.querySelector('#alphabet');//"Stafróf:" id="alphabet"
+    typeElement = el.querySelector('.radio'); //encode/decode radio takkar
 
-    typeElement.addEventListener('click', radioEvent);//click virkar
+    typeElement.addEventListener('click', radioEvent);//'click' virkar fyrir inntak
     alphaElement.addEventListener('input', alphabetEvent);
     inputElement.addEventListener('input', inputEvent);
     shiftElement.addEventListener('input', shiftEvent);
